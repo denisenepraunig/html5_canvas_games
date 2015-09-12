@@ -203,7 +203,7 @@ $(document).ready(function documentReady() {
 	 * min (inklusive) and max (inklusive)
 	 * @param   {Number} min minimum number (inklusive)
 	 * @param   {Number} max maximum number (inklusive)
-	 * @returns {Number} a number between min and ma
+	 * @returns {Number} a number between min and max 
 	 */
 	function getRandomInt(min, max) {
 		

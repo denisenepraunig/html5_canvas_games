@@ -570,7 +570,7 @@ $(document).ready(function documentReady() {
 	/**
 	 * Generate a random sign for a number
 	 * @param   {Number} num - the number
-	 * @returns {Number} number wirth random sign
+	 * @returns {Number} number with random sign
 	 */
 	function getRandomSign(num) {
 
