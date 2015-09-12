@@ -23,10 +23,19 @@
 
 $(document).ready(function documentReady() {
 
-	// ------------------------------------------------------ globals
+	// ---------------------------------------------------------------- globals
 	var canvas = $("#gameCanvas");
 	var ctx = canvas[0].getContext("2d");
 
+	/**
+	 * @namespace - game object settings
+	 * @property {Object} game
+	 * @property {Number} game.w - width
+	 * @property {Number} game.h - height
+	 * @property {Number} game.centerX - center x
+	 * @property {Number} game.border - inner border
+	 * @property {Boolean} game.play - play animation loop
+	 */
 	var game = {
 		w: canvas.width(),
 		h: canvas.height(),
@@ -45,6 +54,32 @@ $(document).ready(function documentReady() {
 	var player;
 	var enemies;
 	
+	/**
+	 * @namespace - default settings
+	 * @property {Object} defaults
+	 * 
+	 * @property {Object} defaults.player 				- player
+	 * @property {Number} defaults.player.w 			- player width
+	 * @property {Number} defaults.player.h 			- player height
+	 * @property {String} defaults.player.color 		- player color
+	 * @property {Object} defaults.player.speed 		- player speed
+	 * @property {Number} defaults.player.speed.min 	- player min speed
+	 * @property {Number} defaults.player.speed.max 	- player max speed
+	 * 
+	 * @property {Object} defaults.enemy 				- enemy
+	 * @property {String} defaults.enemy.color 			- enemy color
+	 * @property {Object} defaults.enemy.speed 			- enemy speed
+	 * @property {Number} defaults.enemy.speed.min 		- enemy min speed
+	 * @property {Number} defaults.enemy.speed.max 		- enemy max speed
+	 * @property {Object} defaults.enemy.size 			- enemy size
+	 * @property {Number} defaults.enemy.size.min 		- enemy min size
+	 * @property {Number} defaults.enemy.size.max 		- enemy max size
+	 * @property {Number} defaults.enemy.size.factor 	- enemy size factor
+	 * 
+	 * @property {Object} defaults.game.speed 			- game speed
+	 * @property {Number} defaults.game.speed.min 		- game min speed
+	 * @property {Number} defaults.game.speed.max 		- game max speed
+	 */
 	var defaults = {
 		player: {
 			w: 16,
@@ -80,16 +115,25 @@ $(document).ready(function documentReady() {
 		}
 	};
 
-	// ----------------------------------------------------- game objects
+	// ----------------------------------------------------------- game objects
 
 	/**
 	 * GameObject
+	 * 
 	 * @class
+	 * @this GameObject
+	 * 
+	 * @property {Number} this.x - x postion
+	 * @property {Number} this.y - y postion
+	 * @property {Number} this.vX - velocity X
+	 * @property {Number} this.vY - velocity Y
+	 * @property {String} this.color - color
+	 * 
 	 * @param {Number} x - x position
 	 * @param {Number} y - y position
 	 * @param {Number} w - width
 	 * @param {Number} h - height
-	 * @param {String} [color="FFFFFF"] - string
+	 * @param {String} [color="FFFFFF"] - color
 	 */
 	function GameObject(x, y, w, h, color, speed) {
 
@@ -107,6 +151,7 @@ $(document).ready(function documentReady() {
 
 	/**
 	 * Player
+	 * 
 	 * @class
 	 * @augments GameObject
 	 * @inheritdoc
@@ -128,6 +173,7 @@ $(document).ready(function documentReady() {
 
 	/**
 	 * Enemy
+	 * 
 	 * @class
 	 * @augments GameObject
 	 * @inheritdoc
@@ -147,11 +193,11 @@ $(document).ready(function documentReady() {
 	Enemy.prototype = Object.create(GameObject.prototype);
 	Enemy.prototype.constructor = Enemy;
 
-	// ------------------------------------------------- inital setup
+	// ----------------------------------------------------------- inital setup
 
 	setupGame();
 	
-	// ---------------------------------------------- setup functions	
+	// -------------------------------------------------------- setup functions
 	/**
 	 * Setup the game
 	 */
@@ -165,7 +211,7 @@ $(document).ready(function documentReady() {
 		animate();
 	}
 
-	// ----------------------------------------------- button handler
+	// --------------------------------------------------------- button handler
 	/**
 	 * Start Button click handler
 	 */
@@ -208,7 +254,7 @@ $(document).ready(function documentReady() {
 	buttons.stop.click(onStop);
 	buttons.restart.click(onRestart);
 
-	// ----------------------------------------------- animation loop
+	// --------------------------------------------------------- animation loop
 	/**
 	 * The main animation frame is retriggered
 	 * after a certain amount of time (ms)
@@ -232,7 +278,7 @@ $(document).ready(function documentReady() {
 		}
 	}
 	
-	// --------------------------------------------- update functions
+	// ------------------------------------------------------- update functions
 
 	/**
 	 * Update the game objects
@@ -298,7 +344,7 @@ $(document).ready(function documentReady() {
 		checkBordersMoveThrough(player);
 	}
 	
-	// ---------------------------------------------- clear functions		
+	// -------------------------------------------------------- clear functions
 	/**
 	 * Clears the canvas
 	 */
@@ -307,7 +353,7 @@ $(document).ready(function documentReady() {
 		ctx.clearRect(0, 0, game.w, game.h);
 	}
 
-	// ----------------------------------------------- draw functions
+	// --------------------------------------------------------- draw functions
 	/**
 	 * Draw all the game objects
 	 */
@@ -356,7 +402,7 @@ $(document).ready(function documentReady() {
 		ctx.strokeRect(enemy.x, enemy.y, enemy.w, enemy.h);
 	}
 	
-	// --------------------------------------------- create functions
+	// ------------------------------------------------------- create functions
 	/**
 	 * Creates a new player object
 	 * @returns {Player} a new player object
@@ -397,7 +443,7 @@ $(document).ready(function documentReady() {
 		return enemies;
 	}
 	
-	// ---------------------------------------------- reset functions
+	// -------------------------------------------------------- reset functions
 	/**
 	 * Resets the player and its values
 	 */
@@ -446,7 +492,7 @@ $(document).ready(function documentReady() {
 		});
 	}
 
-	// ----------------------------------------------- util functions
+	// --------------------------------------------------------- util functions
 	
 	/**
 	 * Calculate the x and y postion
