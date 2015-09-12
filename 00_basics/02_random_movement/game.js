@@ -32,7 +32,7 @@ $(document).ready(function documentReady() {
 	 * @property {Object} game
 	 * @property {Number} game.w - width
 	 * @property {Number} game.h - height
-	 * @property {Number} game.centerX - center x
+	 * @property {Number} game.centerX
 	 * @property {Number} game.border - inner border
 	 * @property {Boolean} game.play - play animation loop
 	 */
@@ -53,32 +53,32 @@ $(document).ready(function documentReady() {
 
 	var player;
 	var enemies;
-	
+
 	/**
 	 * @namespace - default settings
 	 * @property {Object} defaults
 	 * 
-	 * @property {Object} defaults.player 				- player
-	 * @property {Number} defaults.player.w 			- player width
-	 * @property {Number} defaults.player.h 			- player height
-	 * @property {String} defaults.player.color 		- player color
-	 * @property {Object} defaults.player.speed 		- player speed
-	 * @property {Number} defaults.player.speed.min 	- player min speed
-	 * @property {Number} defaults.player.speed.max 	- player max speed
+	 * @property {Object} defaults.player 
+	 * @property {Number} defaults.player.w - width
+	 * @property {Number} defaults.player.h - height
+	 * @property {String} defaults.player.color
+	 * @property {Object} defaults.player.speed
+	 * @property {Number} defaults.player.speed.min
+	 * @property {Number} defaults.player.speed.max
 	 * 
-	 * @property {Object} defaults.enemy 				- enemy
-	 * @property {String} defaults.enemy.color 			- enemy color
-	 * @property {Object} defaults.enemy.speed 			- enemy speed
-	 * @property {Number} defaults.enemy.speed.min 		- enemy min speed
-	 * @property {Number} defaults.enemy.speed.max 		- enemy max speed
-	 * @property {Object} defaults.enemy.size 			- enemy size
-	 * @property {Number} defaults.enemy.size.min 		- enemy min size
-	 * @property {Number} defaults.enemy.size.max 		- enemy max size
-	 * @property {Number} defaults.enemy.size.factor 	- enemy size factor
+	 * @property {Object} defaults.enemy
+	 * @property {String} defaults.enemy.color
+	 * @property {Object} defaults.enemy.speed
+	 * @property {Number} defaults.enemy.speed.min
+	 * @property {Number} defaults.enemy.speed.max
+	 * @property {Object} defaults.enemy.size
+	 * @property {Number} defaults.enemy.size.min
+	 * @property {Number} defaults.enemy.size.max
+	 * @property {Number} defaults.enemy.size.factor
 	 * 
-	 * @property {Object} defaults.game.speed 			- game speed
-	 * @property {Number} defaults.game.speed.min 		- game min speed
-	 * @property {Number} defaults.game.speed.max 		- game max speed
+	 * @property {Object} defaults.game.speed
+	 * @property {Number} defaults.game.speed.min
+	 * @property {Number} defaults.game.speed.max
 	 */
 	var defaults = {
 		player: {
@@ -100,10 +100,10 @@ $(document).ready(function documentReady() {
 				min: 1,
 				max: 2
 			},
-			size : {
-				min : 2,
-				max : 8,
-				factor : 4
+			size: {
+				min: 2,
+				max: 8,
+				factor: 4
 			}
 		},
 		game: {
@@ -196,7 +196,7 @@ $(document).ready(function documentReady() {
 	// ----------------------------------------------------------- inital setup
 
 	setupGame();
-	
+
 	// -------------------------------------------------------- setup functions
 	/**
 	 * Setup the game
@@ -242,14 +242,14 @@ $(document).ready(function documentReady() {
 
 		resetEnemies();
 		resetPlayer();
-		
+
 		clearCanvas();
-		
+
 		drawPlayer();
 		drawPlayerInfo();
 		drawEnemies();
 	}
-	
+
 	buttons.start.click(onStart);
 	buttons.stop.click(onStop);
 	buttons.restart.click(onRestart);
@@ -277,7 +277,7 @@ $(document).ready(function documentReady() {
 			setTimeout(animate, ms);
 		}
 	}
-	
+
 	// ------------------------------------------------------- update functions
 
 	/**
@@ -343,7 +343,7 @@ $(document).ready(function documentReady() {
 
 		checkBordersMoveThrough(player);
 	}
-	
+
 	// -------------------------------------------------------- clear functions
 	/**
 	 * Clears the canvas
@@ -372,12 +372,12 @@ $(document).ready(function documentReady() {
 		ctx.fillStyle = player.color;
 		ctx.fillRect(player.x, player.y, player.w, player.h);
 	}
-	
+
 	/**
 	 * Draw information about the player
 	 */
 	function drawPlayerInfo() {
-		
+
 		document.getElementById("vX").innerHTML = "vX: " + player.vX;
 		document.getElementById("vY").innerHTML = "vY: " + player.vY;
 	}
@@ -401,7 +401,7 @@ $(document).ready(function documentReady() {
 		ctx.strokeStyle = enemy.color;
 		ctx.strokeRect(enemy.x, enemy.y, enemy.w, enemy.h);
 	}
-	
+
 	// ------------------------------------------------------- create functions
 	/**
 	 * Creates a new player object
@@ -418,10 +418,10 @@ $(document).ready(function documentReady() {
 
 		return new Player(pos.x, pos.y, playerSize.w, playerSize.h);
 	}
-	
+
 	/**
 	 * Creates a certain amount (num) of new enemies
-	 * @param   {Number}        [num=defaults.game.enemies] - number of enemies
+	 * @param   {Number} [num=defaults.game.enemies] - number of enemies
 	 * @returns {Array.<Enemy>} an array of enemies
 	 */
 	function createEnemies(num) {
@@ -442,7 +442,7 @@ $(document).ready(function documentReady() {
 
 		return enemies;
 	}
-	
+
 	// -------------------------------------------------------- reset functions
 	/**
 	 * Resets the player and its values
@@ -462,7 +462,7 @@ $(document).ready(function documentReady() {
 		player.vY = speed.vY;
 
 	}
-	
+
 	/**
 	 * Resets the enemies array and generates
 	 * new values for each enemy
@@ -493,13 +493,13 @@ $(document).ready(function documentReady() {
 	}
 
 	// --------------------------------------------------------- util functions
-	
+
 	/**
 	 * Calculate the x and y postion
 	 * for a certain object in the
 	 * center of the game
-	 * @param   {Size}    obj - a size object
-	 * @returns {Postion} a psition
+	 * @param   {Size} obj - a size object
+	 * @returns {Postion}    a position
 	 */
 	function centerObject(obj) {
 
@@ -508,30 +508,30 @@ $(document).ready(function documentReady() {
 			y: game.h / 2 - obj.h / 2
 		};
 	}
-	
+
 	/**
 	 * Creates a random size object for enemies
-	 * @param   {Number} [w=defaults.enemy.size.min]         width
-	 * @param   {Number} [h=defaults.enemy.size.max]         height
-	 * @param   {Number} [factor=defaults.enemy.size.factor] factor
+	 * @param   {Number} [w=defaults.enemy.size.min]         - width
+	 * @param   {Number} [h=defaults.enemy.size.max]         - height
+	 * @param   {Number} [factor=defaults.enemy.size.factor] - factor
 	 * @returns {Size}   a size object
 	 */
 	function getRandomEnemySize(w, h, factor) {
-		
+
 		w = w || defaults.enemy.size.min;
 		h = h || defaults.enemy.size.max;
 		factor = factor || defaults.enemy.size.factor;
-		
+
 		return {
 			w: getRandomInt(w, h) * factor,
 			h: getRandomInt(w, h) * factor
 		};
 	}
-	
+
 	/**
 	 * Creates a random speed oject
-	 * @param   {Number} [minSpeed=defaults.game.speed.min] minimum speed
-	 * @param   {Number} [maxSpeed=defaults.game.speed.max] maximum speed
+	 * @param   {Number} [minSpeed=defaults.game.speed.min] - minimum speed
+	 * @param   {Number} [maxSpeed=defaults.game.speed.max] - maximum speed
 	 * @returns {Speed}  a speed object
 	 */
 	function getRandomSpeed(minSpeed, maxSpeed) {
@@ -544,7 +544,7 @@ $(document).ready(function documentReady() {
 			vY: getRandomSign(getRandomFloat(minSpeed, maxSpeed))
 		};
 	}
-	
+
 	/**
 	 * Create a random positon which is
 	 * placed in a certain distance from
@@ -612,7 +612,7 @@ $(document).ready(function documentReady() {
 
 		return Math.random() * (max - min) + min;
 	}
-	
+
 	/**
 	 * Generate a random sign for a number
 	 * @param   {Number} num - the number
